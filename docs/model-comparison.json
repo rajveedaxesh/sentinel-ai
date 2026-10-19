@@ -1,0 +1,599 @@
+{
+  "anomaly_labels_by_period": {
+    "test": {
+      "catalog:error_rate_spike": 3,
+      "catalog:request_rate_drop": 3,
+      "checkout:error_rate_spike": 3,
+      "checkout:request_rate_drop": 3,
+      "identity:error_rate_spike": 3,
+      "identity:request_rate_drop": 3
+    },
+    "train": {
+      "catalog:cpu_spike": 3,
+      "catalog:memory_leak": 3,
+      "checkout:cpu_spike": 3,
+      "checkout:memory_leak": 3,
+      "identity:cpu_spike": 3,
+      "identity:memory_leak": 3
+    },
+    "validation": {
+      "catalog:latency_spike": 3,
+      "checkout:latency_spike": 3,
+      "identity:latency_spike": 3
+    }
+  },
+  "baseline_three_sigma": {
+    "test": {
+      "average_precision": 0.895623126219185,
+      "confusion_matrix": {
+        "fn": 3,
+        "fp": 1,
+        "tn": 185,
+        "tp": 15
+      },
+      "diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "identity:request_rate_drop": 3
+        },
+        "false_positives_by_service": {
+          "identity": 1
+        },
+        "false_positives_by_utc_hour": {
+          "04:00": 1
+        },
+        "largest_univariate_standardized_deviation": {
+          "memory_utilization": 1
+        }
+      },
+      "f1": 0.8823529411764706,
+      "false_alarms": 1,
+      "precision": 0.9375,
+      "recall": 0.8333333333333334
+    },
+    "validation": {
+      "average_precision": 1.0,
+      "confusion_matrix": {
+        "fn": 0,
+        "fp": 2,
+        "tn": 190,
+        "tp": 9
+      },
+      "f1": 0.9,
+      "false_alarms": 2,
+      "precision": 0.8181818181818182,
+      "recall": 1.0
+    }
+  },
+  "candidates": {
+    "iforest_per_service_200_c0.03": {
+      "test": {
+        "average_precision": 0.38085576720326675,
+        "confusion_matrix": {
+          "fn": 6,
+          "fp": 25,
+          "tn": 161,
+          "tp": 12
+        },
+        "f1": 0.43636363636363634,
+        "false_alarms": 25,
+        "precision": 0.32432432432432434,
+        "recall": 0.6666666666666666
+      },
+      "test_false_positive_diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "catalog:request_rate_drop": 1,
+          "checkout:error_rate_spike": 1,
+          "checkout:request_rate_drop": 3,
+          "identity:error_rate_spike": 1
+        },
+        "false_positives_by_service": {
+          "catalog": 14,
+          "checkout": 6,
+          "identity": 5
+        },
+        "false_positives_by_utc_hour": {
+          "04:00": 1,
+          "05:00": 1,
+          "07:00": 1,
+          "08:00": 2,
+          "09:00": 2,
+          "11:00": 2,
+          "12:00": 3,
+          "13:00": 2,
+          "14:00": 3,
+          "15:00": 2,
+          "16:00": 2,
+          "18:00": 1,
+          "20:00": 1,
+          "22:00": 1,
+          "23:00": 1
+        },
+        "largest_univariate_standardized_deviation": {
+          "api_latency_ms": 4,
+          "cpu_utilization": 9,
+          "error_rate": 6,
+          "memory_utilization": 6
+        }
+      },
+      "threshold_selected_on_validation": 0.00042595699172420787,
+      "validation": {
+        "average_precision": 0.4173927198595097,
+        "confusion_matrix": {
+          "fn": 1,
+          "fp": 24,
+          "tn": 168,
+          "tp": 8
+        },
+        "f1": 0.3902439024390244,
+        "false_alarms": 24,
+        "precision": 0.25,
+        "recall": 0.8888888888888888
+      }
+    },
+    "iforest_pooled_200_c0.01": {
+      "test": {
+        "average_precision": 0.5811443610356655,
+        "confusion_matrix": {
+          "fn": 10,
+          "fp": 8,
+          "tn": 178,
+          "tp": 8
+        },
+        "f1": 0.47058823529411764,
+        "false_alarms": 8,
+        "precision": 0.5,
+        "recall": 0.4444444444444444
+      },
+      "test_false_positive_diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "catalog:request_rate_drop": 3,
+          "checkout:error_rate_spike": 1,
+          "checkout:request_rate_drop": 3,
+          "identity:request_rate_drop": 3
+        },
+        "false_positives_by_service": {
+          "catalog": 2,
+          "checkout": 6
+        },
+        "false_positives_by_utc_hour": {
+          "08:00": 1,
+          "12:00": 1,
+          "13:00": 1,
+          "14:00": 1,
+          "15:00": 1,
+          "16:00": 1,
+          "18:00": 1,
+          "19:00": 1
+        },
+        "largest_univariate_standardized_deviation": {
+          "api_latency_ms": 3,
+          "cpu_utilization": 2,
+          "error_rate": 1,
+          "memory_utilization": 2
+        }
+      },
+      "threshold_selected_on_validation": 0.005006076188683317,
+      "validation": {
+        "average_precision": 0.9083333333333334,
+        "confusion_matrix": {
+          "fn": 1,
+          "fp": 2,
+          "tn": 190,
+          "tp": 8
+        },
+        "f1": 0.8421052631578948,
+        "false_alarms": 2,
+        "precision": 0.8,
+        "recall": 0.8888888888888888
+      }
+    },
+    "iforest_pooled_200_c0.03": {
+      "test": {
+        "average_precision": 0.5811443610356655,
+        "confusion_matrix": {
+          "fn": 10,
+          "fp": 8,
+          "tn": 178,
+          "tp": 8
+        },
+        "f1": 0.47058823529411764,
+        "false_alarms": 8,
+        "precision": 0.5,
+        "recall": 0.4444444444444444
+      },
+      "test_false_positive_diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "catalog:request_rate_drop": 3,
+          "checkout:error_rate_spike": 1,
+          "checkout:request_rate_drop": 3,
+          "identity:request_rate_drop": 3
+        },
+        "false_positives_by_service": {
+          "catalog": 2,
+          "checkout": 6
+        },
+        "false_positives_by_utc_hour": {
+          "08:00": 1,
+          "12:00": 1,
+          "13:00": 1,
+          "14:00": 1,
+          "15:00": 1,
+          "16:00": 1,
+          "18:00": 1,
+          "19:00": 1
+        },
+        "largest_univariate_standardized_deviation": {
+          "api_latency_ms": 3,
+          "cpu_utilization": 2,
+          "error_rate": 1,
+          "memory_utilization": 2
+        }
+      },
+      "threshold_selected_on_validation": 0.017923651659308093,
+      "validation": {
+        "average_precision": 0.9083333333333334,
+        "confusion_matrix": {
+          "fn": 1,
+          "fp": 2,
+          "tn": 190,
+          "tp": 8
+        },
+        "f1": 0.8421052631578948,
+        "false_alarms": 2,
+        "precision": 0.8,
+        "recall": 0.8888888888888888
+      }
+    },
+    "iforest_pooled_200_c0.10": {
+      "test": {
+        "average_precision": 0.5811443610356655,
+        "confusion_matrix": {
+          "fn": 10,
+          "fp": 8,
+          "tn": 178,
+          "tp": 8
+        },
+        "f1": 0.47058823529411764,
+        "false_alarms": 8,
+        "precision": 0.5,
+        "recall": 0.4444444444444444
+      },
+      "test_false_positive_diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "catalog:request_rate_drop": 3,
+          "checkout:error_rate_spike": 1,
+          "checkout:request_rate_drop": 3,
+          "identity:request_rate_drop": 3
+        },
+        "false_positives_by_service": {
+          "catalog": 2,
+          "checkout": 6
+        },
+        "false_positives_by_utc_hour": {
+          "08:00": 1,
+          "12:00": 1,
+          "13:00": 1,
+          "14:00": 1,
+          "15:00": 1,
+          "16:00": 1,
+          "18:00": 1,
+          "19:00": 1
+        },
+        "largest_univariate_standardized_deviation": {
+          "api_latency_ms": 3,
+          "cpu_utilization": 2,
+          "error_rate": 1,
+          "memory_utilization": 2
+        }
+      },
+      "threshold_selected_on_validation": 0.02721344935862846,
+      "validation": {
+        "average_precision": 0.9083333333333334,
+        "confusion_matrix": {
+          "fn": 1,
+          "fp": 2,
+          "tn": 190,
+          "tp": 8
+        },
+        "f1": 0.8421052631578948,
+        "false_alarms": 2,
+        "precision": 0.8,
+        "recall": 0.8888888888888888
+      }
+    },
+    "iforest_pooled_500_c0.03": {
+      "test": {
+        "average_precision": 0.6112068991830727,
+        "confusion_matrix": {
+          "fn": 14,
+          "fp": 2,
+          "tn": 184,
+          "tp": 4
+        },
+        "f1": 0.3333333333333333,
+        "false_alarms": 2,
+        "precision": 0.6666666666666666,
+        "recall": 0.2222222222222222
+      },
+      "test_false_positive_diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "catalog:error_rate_spike": 2,
+          "catalog:request_rate_drop": 3,
+          "checkout:error_rate_spike": 2,
+          "checkout:request_rate_drop": 3,
+          "identity:error_rate_spike": 1,
+          "identity:request_rate_drop": 3
+        },
+        "false_positives_by_service": {
+          "catalog": 1,
+          "checkout": 1
+        },
+        "false_positives_by_utc_hour": {
+          "08:00": 1,
+          "16:00": 1
+        },
+        "largest_univariate_standardized_deviation": {
+          "api_latency_ms": 1,
+          "memory_utilization": 1
+        }
+      },
+      "threshold_selected_on_validation": 0.021836322060587166,
+      "validation": {
+        "average_precision": 0.9333333333333333,
+        "confusion_matrix": {
+          "fn": 2,
+          "fp": 0,
+          "tn": 192,
+          "tp": 7
+        },
+        "f1": 0.8750000000000001,
+        "false_alarms": 0,
+        "precision": 1.0,
+        "recall": 0.7777777777777778
+      }
+    },
+    "iforest_seasonal_residual_200_c0.03": {
+      "test": {
+        "average_precision": 0.31902809792703074,
+        "confusion_matrix": {
+          "fn": 13,
+          "fp": 11,
+          "tn": 175,
+          "tp": 5
+        },
+        "f1": 0.29411764705882354,
+        "false_alarms": 11,
+        "precision": 0.3125,
+        "recall": 0.2777777777777778
+      },
+      "test_false_positive_diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "catalog:error_rate_spike": 2,
+          "catalog:request_rate_drop": 2,
+          "checkout:error_rate_spike": 2,
+          "checkout:request_rate_drop": 3,
+          "identity:error_rate_spike": 2,
+          "identity:request_rate_drop": 2
+        },
+        "false_positives_by_service": {
+          "catalog": 2,
+          "checkout": 4,
+          "identity": 5
+        },
+        "false_positives_by_utc_hour": {
+          "03:00": 1,
+          "04:00": 2,
+          "06:00": 1,
+          "08:00": 1,
+          "13:00": 1,
+          "14:00": 1,
+          "15:00": 1,
+          "16:00": 1,
+          "19:00": 2
+        },
+        "largest_univariate_standardized_deviation": {
+          "api_latency_ms": 3,
+          "cpu_utilization": 2,
+          "error_rate": 2,
+          "memory_utilization": 4
+        }
+      },
+      "threshold_selected_on_validation": 0.04682039755067291,
+      "validation": {
+        "average_precision": 0.4070283840031739,
+        "confusion_matrix": {
+          "fn": 5,
+          "fp": 3,
+          "tn": 189,
+          "tp": 4
+        },
+        "f1": 0.5,
+        "false_alarms": 3,
+        "precision": 0.5714285714285714,
+        "recall": 0.4444444444444444
+      }
+    },
+    "robust_hourly_mad": {
+      "test": {
+        "average_precision": 0.9440892440892442,
+        "confusion_matrix": {
+          "fn": 3,
+          "fp": 3,
+          "tn": 183,
+          "tp": 15
+        },
+        "f1": 0.8333333333333334,
+        "false_alarms": 3,
+        "precision": 0.8333333333333334,
+        "recall": 0.8333333333333334
+      },
+      "test_false_positive_diagnostics": {
+        "false_negatives_by_service_and_type": {
+          "checkout:request_rate_drop": 2,
+          "identity:request_rate_drop": 1
+        },
+        "false_positives_by_service": {
+          "catalog": 1,
+          "identity": 2
+        },
+        "false_positives_by_utc_hour": {
+          "04:00": 1,
+          "06:00": 1,
+          "15:00": 1
+        },
+        "largest_univariate_standardized_deviation": {
+          "cpu_utilization": 1,
+          "memory_utilization": 1,
+          "request_rate": 1
+        }
+      },
+      "threshold_selected_on_validation": 10.779297027712595,
+      "validation": {
+        "average_precision": 1.0,
+        "confusion_matrix": {
+          "fn": 0,
+          "fp": 0,
+          "tn": 192,
+          "tp": 9
+        },
+        "f1": 1.0,
+        "false_alarms": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    }
+  },
+  "dataset_fingerprint": "6f4c9c75beca9acffa8fa87640e71b053d5507a210029db114ad931435bfe4db",
+  "production_80_20_evaluation": {
+    "average_precision": 0.5292671758956422,
+    "baseline": {
+      "average_precision": 0.9190699384247774,
+      "confusion_matrix": {
+        "fn": 3,
+        "fp": 1,
+        "tn": 185,
+        "tp": 15
+      },
+      "f1": 0.8823529411764706,
+      "false_alarms": 1,
+      "precision": 0.9375,
+      "recall": 0.8333333333333334
+    },
+    "confusion_matrix": {
+      "fn": 3,
+      "fp": 34,
+      "tn": 152,
+      "tp": 15
+    },
+    "contamination": 0.03,
+    "dataset_fingerprint": "6f4c9c75beca9acffa8fa87640e71b053d5507a210029db114ad931435bfe4db",
+    "f1": 0.44776119402985076,
+    "false_alarms": 34,
+    "false_positive_diagnostics": {
+      "false_negatives_by_service_and_type": {
+        "catalog:request_rate_drop": 2,
+        "identity:request_rate_drop": 1
+      },
+      "false_positives_by_service": {
+        "catalog": 16,
+        "checkout": 17,
+        "identity": 1
+      },
+      "false_positives_by_utc_hour": {
+        "02:00": 1,
+        "04:00": 1,
+        "06:00": 1,
+        "08:00": 2,
+        "09:00": 2,
+        "10:00": 3,
+        "11:00": 3,
+        "12:00": 6,
+        "13:00": 3,
+        "14:00": 3,
+        "15:00": 3,
+        "16:00": 2,
+        "18:00": 1,
+        "19:00": 2,
+        "23:00": 1
+      },
+      "largest_univariate_standardized_deviation": {
+        "api_latency_ms": 3,
+        "cpu_utilization": 21,
+        "error_rate": 5,
+        "memory_utilization": 3,
+        "request_rate": 2
+      }
+    },
+    "holdout_end": "2026-10-14T23:00:00+00:00",
+    "holdout_start": "2026-10-12T04:00:00+00:00",
+    "model_version": "isolation-forest-v1",
+    "precision": 0.30612244897959184,
+    "recall": 0.8333333333333334,
+    "score_quantiles_by_truth": {
+      "anomaly": {
+        "0.0": -0.020998580196949557,
+        "0.25": 0.0028278244967449295,
+        "0.5": 0.014952165289885022,
+        "0.75": 0.03196002393345704,
+        "1.0": 0.04388105356224159
+      },
+      "normal": {
+        "0.0": -0.0622249208569603,
+        "0.25": -0.03637011278430474,
+        "0.5": -0.023131489838812858,
+        "0.75": -0.004811149211119858,
+        "1.0": 0.04181434301932696
+      }
+    },
+    "seed": 42,
+    "test_rows": 204,
+    "threshold": 0.0,
+    "train_rows": 804
+  },
+  "seed": 42,
+  "selected_candidate_test": {
+    "average_precision": 0.9440892440892442,
+    "confusion_matrix": {
+      "fn": 3,
+      "fp": 3,
+      "tn": 183,
+      "tp": 15
+    },
+    "f1": 0.8333333333333334,
+    "false_alarms": 3,
+    "precision": 0.8333333333333334,
+    "recall": 0.8333333333333334
+  },
+  "selected_candidate_test_diagnostics": {
+    "false_negatives_by_service_and_type": {
+      "checkout:request_rate_drop": 2,
+      "identity:request_rate_drop": 1
+    },
+    "false_positives_by_service": {
+      "catalog": 1,
+      "identity": 2
+    },
+    "false_positives_by_utc_hour": {
+      "04:00": 1,
+      "06:00": 1,
+      "15:00": 1
+    },
+    "largest_univariate_standardized_deviation": {
+      "cpu_utilization": 1,
+      "memory_utilization": 1,
+      "request_rate": 1
+    }
+  },
+  "selected_on_validation": "robust_hourly_mad",
+  "selection_rule": "Highest validation F1, then validation precision, fewer validation false alarms, and validation average precision; test metrics are not used for selection or threshold tuning.",
+  "split": {
+    "test_end": "2026-10-14T23:00:00+00:00",
+    "test_rows": 204,
+    "test_start": "2026-10-12T04:00:00+00:00",
+    "train_end": "2026-10-09T08:00:00+00:00",
+    "train_rows": 603,
+    "validation_end": "2026-10-12T03:00:00+00:00",
+    "validation_rows": 201,
+    "validation_start": "2026-10-09T09:00:00+00:00"
+  }
+}
